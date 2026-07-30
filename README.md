@@ -94,7 +94,7 @@ SecureAuthenticationToolkit/
    ```
 2. Open your web browser and navigate to:
    ```text
-   http://127.0.0.1:5000/
+   http://127.0.0.1:5001/
    ```
 
 #### Running the Terminal CLI
