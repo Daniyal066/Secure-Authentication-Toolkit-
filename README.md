@@ -33,10 +33,18 @@ This application is designed as a learning resource for both Python programming 
 ```text
 SecureAuthenticationToolkit/
 │
-├── main.py            # Main application source code
+├── main.py            # Main CLI application source code
+├── app.py             # Flask Web Application (REST API backend)
 ├── users.json         # JSON database storing registered users
 ├── login_logs.txt     # Audit log tracking login attempts
-└── README.md          # Complete project documentation
+├── README.md          # Complete project documentation
+│
+├── templates/
+│   └── index.html     # Web UI Layout Structure
+│
+└── static/
+    ├── style.css      # Custom styling sheets (glassmorphism UI)
+    └── app.js         # Client-side validation and API communication script
 ```
 
 ---
@@ -50,6 +58,7 @@ SecureAuthenticationToolkit/
 * **`string`**: Contains pre-defined ASCII character constants (digits, letters, symbols) to construct characters for password generation.
 * **`secrets`**: Cryptographically secure pseudo-random number generator (CSPRNG) suitable for managing secrets like passwords and keys.
 * **`datetime`**: Generates human-readable timestamps for auditing and logs.
+* **`flask`** *(New)*: Lightweight WSGI web application framework used to build our Web GUI and expose authentication APIs.
 
 ---
 
@@ -57,17 +66,29 @@ SecureAuthenticationToolkit/
 
 ### Prerequisites
 * Python 3.6 or higher must be installed on your system.
+* Flask package must be installed:
+  ```bash
+  pip install flask
+  ```
 
 ### How to Run
-1. Open a terminal or command prompt.
-2. Navigate to the project directory:
+
+#### Option A: Running the Web Interface (Recommended)
+1. Run the Flask development server:
    ```bash
-   cd SecureAuthenticationToolkit
+   python3 app.py
    ```
-3. Execute the script:
+2. Open your web browser and go to:
+   ```text
+   http://127.0.0.1:5000/
+   ```
+
+#### Option B: Running the Command-Line Interface
+1. Run the CLI tool:
    ```bash
    python3 main.py
    ```
+
 
 ---
 

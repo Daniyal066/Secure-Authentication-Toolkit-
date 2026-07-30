@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Authentication Toolkit</title>
+    <!-- Google Fonts: Outfit for sleek, modern appearance -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for secure styling icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS style sheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="glow-container">
+        <div class="ball ball-1"></div>
+        <div class="ball ball-2"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo-area">
+                <i class="fa-solid fa-shield-halved logo-icon"></i>
+                <h1>Secure Authentication Toolkit</h1>
+            </div>
+            <p class="subtitle">Python & Cybersecurity Demonstration Dashboard</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="glass-tabs">
+            <button class="tab-btn active" data-tab="login-tab">
+                <i class="fa-solid fa-key"></i> Login
+            </button>
+            <button class="tab-btn" data-tab="register-tab">
+                <i class="fa-solid fa-user-plus"></i> Register
+            </button>
+            <button class="tab-btn" data-tab="tools-tab">
+                <i class="fa-solid fa-sliders"></i> Password Tools
+            </button>
+            <button class="tab-btn" data-tab="logs-tab" id="view-logs-btn">
+                <i class="fa-solid fa-list-check"></i> Audit Logs
+            </button>
+        </nav>
+
+        <main class="main-content glass-card">
+            <!-- Alert Notification Toast -->
+            <div id="status-toast" class="toast hidden">
+                <i class="fa-solid fa-circle-info toast-icon"></i>
+                <span id="toast-message">Notification details here...</span>
+            </div>
+
+            <!-- TAB 1: Login Form -->
+            <section id="login-tab" class="tab-panel active">
+                <div class="panel-header">
+                    <h2>Account Authentication</h2>
+                    <p>Enter your registered credentials. Consecutive failure rate limits apply.</p>
+                </div>
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="login-username"><i class="fa-solid fa-user"></i> Username</label>
+                        <input type="text" id="login-username" placeholder="Enter username" required autocomplete="username">
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
+                        <input type="password" id="login-password" placeholder="Enter password" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="submit-btn neon-btn">
+                        <span class="btn-text">Authenticate Credentials</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    </button>
+                </form>
+            </section>
+
+            <!-- TAB 2: Registration Form -->
+            <section id="register-tab" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Create Secure Account</h2>
+                    <p>Register a unique username and evaluate your password strength before saving.</p>
+                </div>
+                <form id="register-form">
+                    <div class="input-group">
+                        <label for="reg-username"><i class="fa-solid fa-user-tag"></i> Unique Username</label>
+                        <input type="text" id="reg-username" placeholder="Create username" required autocomplete="username">
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-password"><i class="fa-solid fa-lock"></i> Master Password</label>
+                        <input type="password" id="reg-password" placeholder="Create strong password" required autocomplete="new-password">
+                    </div>
+
+                    <!-- Dynamic Password Strength UI -->
+                    <div class="strength-meter-container">
+                        <div class="meter-bar-wrapper">
+                            <span class="label-text">Password Audit:</span>
+                            <span id="strength-label" class="strength-tag weak">None</span>
+                            <div class="progress-bar-bg">
+                                <div id="strength-bar" class="progress-bar-fill w-0"></div>
+                            </div>
+                        </div>
+                        <ul id="password-requirements" class="req-list">
+                            <li id="req-len" class="invalid"><i class="fa-solid fa-circle-xmark"></i> At least 8 characters</li>
+                            <li id="req-upper" class="invalid"><i class="fa-solid fa-circle-xmark"></i> One uppercase letter</li>
+                            <li id="req-lower" class="invalid"><i class="fa-solid fa-circle-xmark"></i> One lowercase letter</li>
+                            <li id="req-digit" class="invalid"><i class="fa-solid fa-circle-xmark"></i> One numeric digit</li>
+                            <li id="req-special" class="invalid"><i class="fa-solid fa-circle-xmark"></i> One special symbol</li>
+                        </ul>
+                    </div>
+
+                    <button type="submit" id="register-submit-btn" class="submit-btn neon-btn" disabled>
+                        <span class="btn-text">Register User Credentials</span> <i class="fa-solid fa-user-plus"></i>
+                    </button>
+                </form>
+            </section>
+
+            <!-- TAB 3: Password Utilities (Generator / Auditer) -->
+            <section id="tools-tab" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Cryptographic Password Generator</h2>
+                    <p>Leverages OS system entropy for unpredictability.</p>
+                </div>
+                
+                <div class="tool-layout">
+                    <div class="generator-panel">
+                        <div class="slider-group">
+                            <div class="slider-labels">
+                                <label for="pass-length">Password Length</label>
+                                <span id="length-val">12</span>
+                            </div>
+                            <input type="range" id="pass-length" min="8" max="32" value="12">
+                        </div>
+
+                        <button id="generate-btn" class="secondary-btn">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Password
+                        </button>
+                    </div>
+
+                    <div class="generator-output-card hidden" id="gen-output-container">
+                        <div class="password-display-row">
+                            <input type="text" id="generated-password" readonly>
+                            <button id="copy-btn" title="Copy to clipboard">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                        <div class="security-explanations">
+                            <h4>Why is this password secure?</h4>
+                            <ul id="generator-explanations-list">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: Audit Logs -->
+            <section id="logs-tab" class="tab-panel">
+                <div class="panel-header">
+                    <h2>System Audit Trails</h2>
+                    <p>Monitoring event streams helps discover credential stuffing attacks.</p>
+                </div>
+                <div class="logs-wrapper">
+                    <div class="logs-filter-row">
+                        <span class="logs-status-indicator"><i class="fa-solid fa-shield-halved"></i> Live Log Monitor</span>
+                        <button id="refresh-logs-btn" class="text-btn"><i class="fa-solid fa-rotate"></i> Refresh</button>
+                    </div>
+                    <div class="logs-table-container">
+                        <table class="logs-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Username</th>
+                                    <th>Event Status</th>
+                                    <th>Audit Details</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logs-table-body">
+                                <tr>
+                                    <td colspan="4" class="text-center">Loading logs from database...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Designed for Cybersecurity Assignments | Powered by Python Flask API</p>
+        </footer>
+    </div>
+
+    <!-- JS code file -->
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
