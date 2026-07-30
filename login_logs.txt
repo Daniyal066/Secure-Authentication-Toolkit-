@@ -1,3 +1,14 @@
 # Secure Authentication Toolkit - Login Audit Logs
 # Timestamp | Username | Status | Message
 [2026-07-30 15:11:19] User: Daniyal | Status: Registration | Info: User registered successfully.
+[2026-07-30 15:16:04] User: Daniyal | Status: Success | Info: Successful login.
+[2026-07-30 15:16:23] User: Sreehas | Status: Registration | Info: User registered successfully.
+[2026-07-30 15:18:40] User: web_test_user | Status: Registration | Info: User registered via Web UI.
+[2026-07-30 15:18:40] User: web_test_user | Status: Success | Info: Successful Web login.
+[2026-07-30 15:18:40] User: web_test_user | Status: Failed | Info: Web login: Failed attempt 1 of 3.
+[2026-07-30 15:18:40] User: web_test_user | Status: Failed | Info: Web login: Failed attempt 2 of 3.
+[2026-07-30 15:18:40] User: web_test_user | Status: Locked | Info: Web login: Account locked after 3 failures.
+[2026-07-30 15:18:40] User: web_test_user | Status: Locked | Info: Blocked Web login attempt on locked account.
+[2026-07-30 15:24:27] IP: 127.0.0.1 | User: Daniyal | Status: Failed | Info: Web login: Failed attempt 1 of 3.
+[2026-07-30 15:24:40] IP: 127.0.0.1 | User: CyberStudent | Status: Failed | Info: Web login attempt on non-existent account.
+[2026-07-30 15:24:57] IP: 127.0.0.1 | User: Daniyal | Status: Success | Info: Successful Web login.

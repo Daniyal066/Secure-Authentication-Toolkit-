@@ -3,5 +3,10 @@
         "password": "ff7bd97b1a7789ddd2775122fd6817f3173672da9f802ceec57f284325bf589f",
         "failed_attempts": 0,
         "locked": false
+    },
+    "Sreehas": {
+        "password": "179588aa09cff63f9230f9d80fb2d294159e3aababd22b3338e922a879f92eca",
+        "failed_attempts": 0,
+        "locked": false
     }
 }
