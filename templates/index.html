@@ -37,6 +37,9 @@
             <button class="tab-btn" data-tab="tools-tab">
                 <i class="fa-solid fa-sliders"></i> Password Tools
             </button>
+            <button class="tab-btn" data-tab="analyzer-tab">
+                <i class="fa-solid fa-triangle-exclamation"></i> Attack Analyzer
+            </button>
             <button class="tab-btn" data-tab="logs-tab" id="view-logs-btn">
                 <i class="fa-solid fa-list-check"></i> Audit Logs
             </button>
@@ -49,7 +52,7 @@
                 <span id="toast-message">Notification details here...</span>
             </div>
 
-            <!-- TAB 1: Login Form -->
+            <!-- TAB 1: Login Form (Module 2) -->
             <section id="login-tab" class="tab-panel active">
                 <div class="panel-header">
                     <h2>Account Authentication</h2>
@@ -70,7 +73,7 @@
                 </form>
             </section>
 
-            <!-- TAB 2: Registration Form -->
+            <!-- TAB 2: Registration Form (Module 1) -->
             <section id="register-tab" class="tab-panel">
                 <div class="panel-header">
                     <h2>Create Secure Account</h2>
@@ -110,11 +113,11 @@
                 </form>
             </section>
 
-            <!-- TAB 3: Password Utilities (Generator / Auditer) -->
+            <!-- TAB 3: Password Utilities (Module 3) -->
             <section id="tools-tab" class="tab-panel">
                 <div class="panel-header">
                     <h2>Cryptographic Password Generator</h2>
-                    <p>Leverages OS system entropy for unpredictability.</p>
+                    <p>Leverages OS system entropy for unpredictability. Select your character requirements.</p>
                 </div>
                 
                 <div class="tool-layout">
@@ -125,6 +128,26 @@
                                 <span id="length-val">12</span>
                             </div>
                             <input type="range" id="pass-length" min="8" max="32" value="12">
+                        </div>
+
+                        <!-- Checkboxes for character selection -->
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="gen-upper" checked>
+                                <span>Uppercase Letters (A-Z)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="gen-lower" checked>
+                                <span>Lowercase Letters (a-z)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="gen-digits" checked>
+                                <span>Numbers (0-9)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="gen-special" checked>
+                                <span>Special Symbols (!@#$)</span>
+                            </label>
                         </div>
 
                         <button id="generate-btn" class="secondary-btn">
@@ -149,7 +172,66 @@
                 </div>
             </section>
 
-            <!-- TAB 4: Audit Logs -->
+            <!-- TAB 4: Attack Analyzer (Modules 4 & 5) -->
+            <section id="analyzer-tab" class="tab-panel">
+                <div class="panel-header">
+                    <h2>Threat & Attack Analyzer</h2>
+                    <p>Detect brute force attempts by IP addresses and credential guessing targeted at usernames.</p>
+                </div>
+
+                <div class="analyzer-layout">
+                    <div class="log-input-section">
+                        <div class="textarea-header">
+                            <label for="analyzer-logs-input">Authentication Attempt Logs</label>
+                            <button id="load-mock-btn" class="text-btn">
+                                <i class="fa-solid fa-file-import"></i> Load Mock Log Data
+                            </button>
+                        </div>
+                        <textarea id="analyzer-logs-input" rows="8" placeholder="Paste logs here (e.g. IP,Username,Password,Status)..."></textarea>
+                        
+                        <button id="analyze-btn" class="submit-btn neon-btn">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i> Analyze Logs for Threat Vectors
+                        </button>
+                    </div>
+
+                    <!-- Alerts Display Dashboard -->
+                    <div class="analysis-results-wrapper hidden" id="analysis-results">
+                        <div class="results-summary">
+                            <div class="summary-card">
+                                <span class="summary-val" id="summary-total-processed">0</span>
+                                <span class="summary-lbl">Records Processed</span>
+                            </div>
+                            <div class="summary-card alert-card-ip">
+                                <span class="summary-val" id="summary-ip-alerts">0</span>
+                                <span class="summary-lbl">IP Alerts Flagged</span>
+                            </div>
+                            <div class="summary-card alert-card-user">
+                                <span class="summary-val" id="summary-user-alerts">0</span>
+                                <span class="summary-lbl">User Accounts Targeted</span>
+                            </div>
+                        </div>
+
+                        <div class="alert-columns">
+                            <!-- Module 4 Output -->
+                            <div class="alert-box">
+                                <h3><i class="fa-solid fa-network-wired"></i> Module 4: Brute Force Alerts (IP)</h3>
+                                <div class="alert-list" id="ip-alerts-list">
+                                    <div class="no-alerts">No brute force attacks detected.</div>
+                                </div>
+                            </div>
+                            <!-- Module 5 Output -->
+                            <div class="alert-box">
+                                <h3><i class="fa-solid fa-user-shield"></i> Module 5: Password Guessing (Accounts)</h3>
+                                <div class="alert-list" id="user-alerts-list">
+                                    <div class="no-alerts">No password guessing attacks detected.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: Audit Logs -->
             <section id="logs-tab" class="tab-panel">
                 <div class="panel-header">
                     <h2>System Audit Trails</h2>
@@ -165,6 +247,7 @@
                             <thead>
                                 <tr>
                                     <th>Timestamp</th>
+                                    <th>IP Address</th>
                                     <th>Username</th>
                                     <th>Event Status</th>
                                     <th>Audit Details</th>
@@ -172,7 +255,7 @@
                             </thead>
                             <tbody id="logs-table-body">
                                 <tr>
-                                    <td colspan="4" class="text-center">Loading logs from database...</td>
+                                    <td colspan="5" class="text-center">Loading logs from database...</td>
                                 </tr>
                             </tbody>
                         </table>

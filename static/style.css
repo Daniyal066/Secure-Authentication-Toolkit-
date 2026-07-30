@@ -124,8 +124,8 @@ header h1 {
 /* Navigation Tabs Menu */
 .glass-tabs {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
     background: rgba(22, 28, 45, 0.6);
     border: 1px solid var(--card-border);
     backdrop-filter: blur(12px);
@@ -139,16 +139,16 @@ header h1 {
     border: none;
     outline: none;
     color: var(--text-secondary);
-    padding: 0.75rem 0.5rem;
+    padding: 0.75rem 0.3rem;
     font-family: var(--font-primary);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     transition: var(--transition-smooth);
 }
 
@@ -244,6 +244,57 @@ form {
     border-color: var(--accent-cyan);
     background: rgba(255, 255, 255, 0.06);
     box-shadow: 0 0 10px rgba(6, 182, 212, 0.15);
+}
+
+/* Checkboxes */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: var(--transition-smooth);
+}
+
+.checkbox-label input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--card-border);
+    border-radius: 4px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    background: var(--accent-cyan);
+    border-color: var(--accent-cyan);
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: #ffffff;
+    font-size: 0.65rem;
+}
+
+.checkbox-label:hover {
+    color: var(--text-primary);
 }
 
 /* Buttons */
@@ -569,6 +620,184 @@ form {
     top: 0.5rem;
 }
 
+/* Attack Analyzer Styling */
+.analyzer-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.textarea-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.textarea-header label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+#analyzer-logs-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: monospace;
+    font-size: 0.85rem;
+    padding: 0.75rem;
+    outline: none;
+    resize: vertical;
+    transition: var(--transition-smooth);
+    margin-bottom: 1rem;
+}
+
+#analyzer-logs-input:focus {
+    border-color: var(--accent-cyan);
+}
+
+/* Analysis Results Dashboard */
+.analysis-results-wrapper {
+    margin-top: 1.5rem;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.results-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.summary-val {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.summary-lbl {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.alert-card-ip .summary-val {
+    color: var(--status-error);
+}
+
+.alert-card-user .summary-val {
+    color: var(--status-warning);
+}
+
+.alert-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.alert-box {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.25rem;
+}
+
+.alert-box h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding-bottom: 0.5rem;
+}
+
+.alert-list {
+    max-height: 250px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.no-alerts {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+/* Individual alert bubbles */
+.alert-item {
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.alert-item.warning-state {
+    background: rgba(245, 158, 11, 0.05);
+    border-color: rgba(245, 158, 11, 0.2);
+}
+
+.alert-item-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.alert-target {
+    color: #ffffff;
+}
+
+.alert-badge {
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    padding: 0.05rem 0.3rem;
+    border-radius: 3px;
+    font-weight: 800;
+}
+
+.alert-badge.critical {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--status-error);
+}
+
+.alert-badge.high {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--status-warning);
+}
+
+.alert-desc {
+    color: var(--text-secondary);
+}
+
+.alert-meta {
+    margin-top: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
 /* Audit Logs Tab */
 .logs-wrapper {
     display: flex;
@@ -688,21 +917,21 @@ footer {
     color: var(--text-muted);
 }
 
-/* Custom scrollbar for log tables */
-.logs-table-container::-webkit-scrollbar {
+/* Custom scrollbar */
+.logs-table-container::-webkit-scrollbar, .alert-list::-webkit-scrollbar {
     width: 6px;
 }
 
-.logs-table-container::-webkit-scrollbar-track {
+.logs-table-container::-webkit-scrollbar-track, .alert-list::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.logs-table-container::-webkit-scrollbar-thumb {
+.logs-table-container::-webkit-scrollbar-thumb, .alert-list::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
 }
 
-.logs-table-container::-webkit-scrollbar-thumb:hover {
+.logs-table-container::-webkit-scrollbar-thumb:hover, .alert-list::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
@@ -711,7 +940,13 @@ footer {
     .glass-tabs {
         grid-template-columns: 1fr;
     }
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
     .req-list {
+        grid-template-columns: 1fr;
+    }
+    .alert-columns {
         grid-template-columns: 1fr;
     }
     .glass-card {
